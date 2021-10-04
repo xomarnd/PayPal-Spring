@@ -1,0 +1,56 @@
+<div>
+    <h3>Корзина</h3>
+    <span ng-show="cart == null || cart.items.length == 0">Ваша корзина пуста</span>
+    <div ng-show="cart.items.length > 0">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Название</td>
+                <td>Количество</td>
+                <td>Цена</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="oi in cart.items">
+                <td>{{oi.productTitle}}</td>
+                <td>
+                    <button class="btn btn-primary" ng-click="decrementCartPosition(oi.productId)">-</button>
+                    {{oi.quantity}}
+                    <button class="btn btn-primary" ng-click="incrementCartPosition(oi.productId)">+</button>
+                </td>
+                <td>{{oi.quantity + ' x ' + oi.pricePerProduct + ' = ' + oi.price}}</td>
+                <td>
+                    <button class="btn btn-danger" ng-click="removeItemFromCart(oi.productId)">Удалить (X)</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Итого</td>
+                <td></td>
+                <td>{{cart.price}}</td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <p></p>
+        <button class="btn btn-danger" ng-click="clearCart()">Очистить корзину</button>
+        <p></p>
+
+        <form novalidate ng-submit="createOrder()">
+            <div class="form-group col-md-6">
+                <label for="destinationField">Адрес доставки</label>
+                <input class="form-control" type="text" ng-model="order_info.address" id="destinationField">
+            </div>
+            <p></p>
+            <div class="form-group col-md-6">
+                <label for="phoneField">Телефон получателя</label>
+                <input class="form-control" type="text" ng-model="order_info.phone" id="phoneField">
+            </div>
+            <p></p>
+            <div>
+                <button ng-show="isUserLoggedIn()" class="btn btn-primary" type="submit">Оформить заказ</button>
+                <button ng-show="!isUserLoggedIn()" class="btn btn-secondary">Авторизуйтесь для оформления заказа</button>
+            </div>
+        </form>
+    </div>
+</div>
