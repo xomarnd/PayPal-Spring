@@ -11,22 +11,13 @@ angular.module('app').controller('ordersController', function ($scope, $http, $l
         });
     }
 
-    $scope.pay = function (orderId) {
-        $http({
-            url: contextPath + '/api/v1/paypal/buy/' + orderId,
-            method: 'GET'
-        }).then(function (response) {
-            console.log(response);
-        });
-    }
-
     paypal.Buttons({
         createOrder: function(data, actions) {
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        currency: 'EUR',
-                        value: '1.00'
+                        currency: 'US',
+                        value: '100.00'
                     }
                 }]
             });

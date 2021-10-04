@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -83,14 +82,6 @@ public class PayPalController {
 
             return doPayment;
 
-//            Iterator<Links> links = doPayment.getLinks().iterator();
-//
-//            while (links.hasNext()) {
-//                Links link = links.next();
-//                if (link.getRel().equalsIgnoreCase("approval_url")) {
-//                    return "redirect:" + link.getHref();
-//                }
-//            }
         } catch (Exception e) {
             throw new ExecuteOperationException("Невозможно выполнить платеж");
         }
